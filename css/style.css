@@ -225,12 +225,14 @@ img.project-image {
 #contact-form textarea {
 	border: 1px solid #888;
 	border-radius: 2px;
+	padding: 2px 5px 4px;
+	font-size: 14px;
 }
 
 #contact-form input[type="text"],
 #contact-form input[type="email"] {
-	width: 378px;
-	height: 20px;
+	width: 387px;
+	height: 18px;
 }
 
 #contact-form input[type="submit"] {
