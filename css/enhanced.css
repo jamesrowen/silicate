@@ -34,7 +34,7 @@
 	#settings-btn {
 		background-color: transparent;
 		width: 85px;
-		left: -87px;
+		left: -86px;
 		padding: 0px;
 		border-left: none;
 		border-top: none;
@@ -44,6 +44,6 @@
 		transform: rotate(-90deg);
 		-ms-transform:rotate(-90deg);
 		-webkit-transform:rotate(-90deg);
-		left: -54px;
+		left: -53px;
 	}
 }

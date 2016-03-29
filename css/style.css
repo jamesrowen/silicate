@@ -218,6 +218,37 @@ img.project-image {
 }
 
 
+/* contact form */
+#contact-form { margin-top: 22px }
+
+#contact-form input,
+#contact-form textarea {
+	border: 1px solid #888;
+	border-radius: 2px;
+}
+
+#contact-form input[type="text"],
+#contact-form input[type="email"] {
+	width: 378px;
+	height: 20px;
+}
+
+#contact-form input[type="submit"] {
+  background-color: #fff;
+  padding: 8px 16px;
+  font-size: 16px;
+  color: #333;
+}
+
+#contact-form > div { margin-bottom: 6px; }
+
+.form-label {
+	display: inline-block;
+	width: 75px;
+	vertical-align: top;
+}
+
+
 /* settings widget */
 #settings {
 	position: fixed;
