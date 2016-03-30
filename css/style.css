@@ -81,7 +81,7 @@ a {
 	color: #888;
 	border-right: 1px solid #ddd;
 	background-color:inherit;
-	z-index: 1000;
+	z-index: 10;
 	box-shadow: 1px 1px 2px #555;
 	-webkit-transition: left .2s;
 	transition: left .2s;
@@ -129,7 +129,7 @@ a {
 	width:13px; height:13px;
 	border:2px solid;
 	border-radius:7px;
-	z-index:1337;
+	z-index:15;
 	-webkit-transition:
 		border-color .5s linear,
 		background-color .5s linear;
@@ -152,12 +152,12 @@ a {
 	margin: 0 1em 0 200px;
 	min-height: 100%;
 	box-shadow: none;
-	z-index: 999;
+	z-index: 5;
 }
 #content>:first-child { padding-top: 6.25em }
 
 .post { padding: 1.25em 0; }
-.footer { margin-top: 12em; }
+.footer { margin-top: 13em; }
 
 .post h2 {
 	font-size: 1.75em;
@@ -202,7 +202,6 @@ a {
 }
 
 img.project-image {
-	display: inline-block;
 	margin: 0;
 	width: 22%;
 }
@@ -212,6 +211,11 @@ img.project-image {
 	vertical-align: top;
 	margin-left: 2%;
 	width: 74%;
+}
+
+#gallery img {
+	margin: 0 .5em .8em 0;
+	width: 22.5%;
 }
 
 .resume-section {
@@ -312,6 +316,46 @@ img.project-image {
 	-webkit-transform:rotate(360deg);
 }
 
+#lbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(32, 32, 32, .75);
+	z-index: 30;
+  text-align: center;
+	display: none;
+}
+#lbox:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -.25em;
+}
+#lbox > div {
+	display: inline-block;
+	vertical-align: middle;
+}
+#lbox-prev, #lbox-next {
+	font-size: 40px;
+	padding: 100px 14px;
+	margin: 0px 10px;
+	cursor: pointer;
+	color: #ccc;
+	border-radius: 8px;
+}
+#lbox-prev:hover, #lbox-next:hover {
+	background-color: rgba(160, 160, 160, .75);
+	color: #000;
+}
+#lbox img {
+  max-width:940px;
+	border: 2px solid #fff;
+	border-radius: 8px;
+}
+
 /* force menu buttons to retain their particular style when not active */
 #light { color:#bbb }
 #dark { color:#333 }
@@ -353,5 +397,6 @@ img.project-image {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-cog:before { content: "\e601"; }
-.icon-download:before { content: "\e600"; }
+.icon-cog:before { content: "\f013"; }
+.icon-chevron-left:before { content: "\f053"; }
+.icon-chevron-right:before { content: "\f054"; }

@@ -61,9 +61,45 @@ scope.navDivs = scope.navMenuItems.map(function(){
 		$('#page').removeClass("open-sans lato droid-sans pt-sans-narrow oxygen").addClass(e.target.id.replace('#',''));
 	});
 
+	// lightbox events
+	$('#gallery a').click(function(e) {
+		e.preventDefault();
+		$('#lbox-content').html('<img src="' + $(this).attr("href") + '" />');
+		curImage = $(this);
+		$('#lbox').show();
+	});
+	$('#lbox').click(function(e) {
+		if (this == e.target) {
+			$('#lbox').hide();
+		}
+	});
+	$('#lbox-prev').click(function(e) {
+		updateImage(curImage.prev());
+	});
+	$('#lbox-next').click(function(e) {
+		updateImage(curImage.next());
+	});
+
 	//
 	// end click events
 
+
+	$(document).keyup(function(e) {
+		// esc exits lightbox
+		if (e.keyCode == 27) {
+			$('#lbox').hide();
+		}
+		else if (e.keyCode == 37) {
+			if ($('#lbox').is(':visible')) {
+				updateImage(curImage.prev());
+			}
+		}
+		else if (e.keyCode == 39) {
+			if ($('#lbox').is(':visible')) {
+				updateImage(curImage.next());
+			}
+		}
+	});
 
 	// make the scrollbar draggable (adapted from jquery.slimscroll)
 	$('#scrollbar').bind("mousedown", function(e) {
@@ -96,8 +132,7 @@ scope.navDivs = scope.navMenuItems.map(function(){
 })(window);
 
 
-function onResize(e)
-{
+function onResize(e) {
 		// vertically center settings widget
 		$("#settings").css('top', ($(window).height()-$("#settings").height())/2 + 'px');
 
@@ -109,8 +144,7 @@ function onResize(e)
 }
 
 // during a resize event, perform js media queries
-function mediaQueries()
-{
+function mediaQueries() {
 	// mobile - default
 
 	// left menu - click on it to open/close
@@ -134,8 +168,7 @@ function mediaQueries()
 	}
 };
 
-function onScroll(e)
-{
+function onScroll(e) {
 	var top = $(document).scrollTop();
 	var maxtop = $('#content').height() - $(window).height();
 
@@ -161,3 +194,10 @@ function onScroll(e)
     scope.navMenuItems.removeClass("active").filter("[href=#"+id+"]").addClass("active");
   }
 };
+
+function updateImage(newImage) {
+	if (newImage.length > 0) {
+		curImage = newImage;
+		$('#lbox-content').html('<img src="' + curImage.attr("href") + '" />');
+	}
+}
