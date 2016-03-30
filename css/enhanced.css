@@ -14,6 +14,11 @@
 		margin: 0 .4em .8em 0;
 		width: 30.5%;
 	}
+
+	#contact-form input[type="text"],
+	#contact-form textarea {
+		width: 380px;
+	}
 }
 
 /* 768-1024px ~ tablet landscape */
