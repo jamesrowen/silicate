@@ -227,6 +227,7 @@ img.project-image {
 	border-radius: 2px;
 	padding: 2px 5px 4px;
 	font-size: 14px;
+	background-color: #eee;
 }
 
 #contact-form input[type="text"],
