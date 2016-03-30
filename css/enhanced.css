@@ -9,6 +9,11 @@
 
 	.post { padding: 2em 0; }
 	.post-content { padding-left:1.5em; }
+
+	#gallery img {
+		margin: 0 .4em .8em 0;
+		width: 30.5%;
+	}
 }
 
 /* 768-1024px ~ tablet landscape */
@@ -16,6 +21,13 @@
 	#content { margin-right:2.2em; }
 	.post { padding: 2.5em 0; }
 	.post-content { padding-left:2em; }
+}
+
+@media (min-width: 55em) {
+	#gallery img {
+		margin: 0 .5em .8em 0;
+		width: 22.5%;
+	}
 }
 
 /* full size */
