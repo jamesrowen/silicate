@@ -157,6 +157,7 @@ a {
 #content>:first-child { padding-top: 6.25em }
 
 .post { padding: 1.25em 0; }
+.footer { margin-top: 12em; }
 
 .post h2 {
 	font-size: 1.75em;
