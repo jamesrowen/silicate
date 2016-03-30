@@ -342,9 +342,9 @@ img.project-image {
 	vertical-align: middle;
 }
 #lbox-prev, #lbox-next {
-	font-size: 40px;
-	padding: 100px 14px;
-	margin: 0px 10px;
+	font-size: 16px;
+	padding: 14px 6px;
+	margin: 0;
 	cursor: pointer;
 	color: #ccc;
 	border-radius: 8px;
@@ -354,7 +354,7 @@ img.project-image {
 	color: #000;
 }
 #lbox img {
-  max-width:940px;
+  max-width: 300px;
 	border: 2px solid #fff;
 	border-radius: 8px;
 }
