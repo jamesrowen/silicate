@@ -62,7 +62,7 @@ scope.navDivs = scope.navMenuItems.map(function(){
 	});
 
 	// lightbox events
-	$('#gallery a').click(function(e) {
+	$('.lbox-active a').click(function(e) {
 		e.preventDefault();
 		$('#lbox-content').html('<img src="' + $(this).attr("href") + '" />');
 		curImage = $(this);
