@@ -50,7 +50,6 @@
 /* full size */
 @media (min-width: 70em) {
 	#content { margin-right:12.5em; }
-	.post { padding: 3em 0; }
 	.post-content { padding-left:2.5em; }
 
 	#settings {
