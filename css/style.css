@@ -195,6 +195,10 @@ a {
 	border-right: 1px solid;
 }
 
+.post div {
+	margin: 1.5em 0;
+}
+
 .post-content { padding-left: .625em; }
 
 .project-blurb {
@@ -225,13 +229,10 @@ img.project-image {
 	margin: 0 1.2em 1.3em 0;
 	width: 47%;
 }
-.half-images a:first-child img { margin-top: 1.5em; }
-.half-images a:last-child img { margin-bottom: 1.5em; }
 
 .resume-section {
 	margin: 1.5em 0;
 }
-
 
 /* contact form */
 #contact-form { margin-top: 2em }
