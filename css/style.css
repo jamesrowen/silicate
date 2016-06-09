@@ -1,6 +1,9 @@
 /* global styles */
 html, body { height: 100% }
-
+p {
+	text-indent: 1em;
+	margin-bottom: .6em;
+}
 iframe { margin: .7em 0; }
 
 #page {

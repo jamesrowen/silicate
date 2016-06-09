@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Tripxl ▲</title>
+    <meta name="author" content="James Rowen" />
+    <meta name="description" content="Silicate" />
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link rel="icon" type="image/png" href="icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen, projection" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen, handheld" />
+    <link rel="stylesheet" type="text/css" href="css/enhanced.css" media="screen and (min-width: 40.5em)" />
+    <!--[if (lt IE 9)&(!IEMobile)]>
+    <link rel="stylesheet" type="text/css" href="css/enhanced.css" />
+    <![endif]-->
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700|Lato:400italic,400,700|Droid+Sans:400italic,400,700|PT+Sans+Narrow:400italic,400,700|Oxygen:400italic,400,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+
+    <div id="page" class="blue dark oxygen">
+
+      <div id="nav" class="weight-bold">
+        <div id="nav-main">
+          <h1 class="underline">Tripxl Devlog</h1>
+          <ul>
+            <li><a class="active" href="#about">about</a></li>
+            <li><a href="#may31">May 31</a></li>
+            <li><a href="#june1">June 1</a></li>
+            <li><a href="#june2">June 2</a></li>
+            <li><a href="#june3">June 3</a></li>
+            <li><a href="#june5">June 5</a></li>
+            <li><a href="#june6">June 6</a></li>
+            <li><a href="#june8">June 8</a></li>
+          </ul>
+        </div>
+
+        <div id="nav-links">
+          <ul>
+            <li><a id="email" href="mailto:jamesrowen@gmail.com">email</a></li>
+            <li><a id="facebook" href="http://facebook.com/jameslrowen">facebook</a></li>
+          </ul>
+        </div>
+
+        <div id="scrollbar" class="dark"></div>
+
+      </div> <!-- end nav -->
+
+
+      <div id="content">
+
+        <div id="about" class="post">
+          <h2 class="underline">adventures in arduinos, LEDs, and triangles</h2>
+          <div class="post-content">
+            <img src="img/landscape.jpg">
+            <p>
+              When I was moving into a new apartment, I saw the piece of wood that I had used for my triangular LED panel prototype. The guts of it had been cannibalized for the full-size panels I made, but those were stuck in Reno (where I built them) since I couldn’t fit them in my car to get them home to SF. I had been wanting to keep working on the software, but without the panels it would have been impossible to test (short of setting up a whole simulated environment, something I eventually would like to do), so the project lapsed into that dangerous state where you’ve lost the momentum and the context, and your attention gravitates toward other things, and it’s slipping farther and farther away…
+            </p>
+
+            <p>
+              Seeing the empty shell of the prototype triggered a spark of inspiration to put it back together, let’s run with that and get these gears moving again!
+            </p>
+          </div>
+        </div>
+
+        <div id="may31" class="post">
+          <h2 class="underline">Booting up again</h2>
+          <h3>May 31</h3>
+          <div class="post-content">
+            <p>
+              I had a power supply laying around but no power cord. The power supply takes 110V AC power from the wall and converts it to the 5V DC power needed by the pixels. This one outputs 12 amps, for a total of 60 watts (5V * 12A). Each pixel consumes 60mA when displaying white at full brightness, so this PSU could power up to 200 lights. You usually won’t have all pixels displaying white color at full brightness, so it could power more depending on your usage. Buy an IEC cord, a regular PC power cord.
+            </p>
+
+            <p>
+              [got an IEC cord, cut off the end, looked at the diagram, wired it to the PSU, tested the light on, tested connecting it to the pixels.]
+            </p>
+
+            <p>That’s about as far as I can go until I get my Arduino.</p>
+          </div>
+        </div>
+
+        <div id="june1" class="post">
+          <h2 class="underline">Getting back in the swing</h2>
+          <h3>June 1</h3>
+          <div class="post-content">
+            <p>
+              Got the Arduino, uploaded the program (love Arduino because it’s so simple - take it out of the box, connect the USB, press the Upload button, and it’s ready to go. Total of about 30 seconds), connected it to the pixels, and it worked. Awesome. Now I put the lights into the holes, and can kind of see it working.
+            </p>
+
+            <p>
+              Switched the sequences over form taking functions to control the params, to taking a start and end value and just linearly interpolating between them. This made it so I could write them in an array (or file) instead of having rows of “new Sequence(...)” hardcoded. After making  this change I found out I was hitting the memory limit. This is sometimes hard to detect because your program can just fail in strange ways. When debugging you just have to remember the small limit and think if anything you did could have increased memory usage (there are some measurement libraries out there but I haven’t used them). I took out a few of the sequences and it worked. In this case I had increased the number of member variables in each sequence. Long story short, I knew I would have to implement streaming sequence data from files.
+            </p>
+
+            <p>
+              Looking into that, the way to go is with a microSD card reader. So I ordered a few of those and a proto shield. I also wondered how you would transfer files to the card while it’s in the reader, because moving it between the computer and the Arduino each time you wanted to edit the file would be tedious. Turns out you use the Arduino’s serial port. And this is also how I would read files on the computer and send to the Arduino, so I can set that up before the reader comes in. There are a number of ways to write a program on the computer that will talk to the Arduino over the serial port, I chose to go with Processing, because it’s related and conceptually similar to Arduino, the IDE even looks the same.
+            </p>
+          </div>
+        </div>
+
+        <div id="june2" class="post">
+          <h2 class="underline">Why would I post this</h2>
+          <h3>June 2</h3>
+          <div class="post-content">
+            <p>
+              New lights came in, started basic Serial communication with Processing. I googled “arduino serial communication” and then “arduino serial communication processing” and started with some of the sample code.
+            </p>
+          </div>
+        </div>
+
+        <div id="june3" class="post">
+          <h2 class="underline">Serial killing it</h2>
+          <h3>June 3</h3>
+          <div class="post-content">
+            <p>
+              Spent far too much time on the hellish process of getting serial communication working. Fiddling with line endings and so on. It was difficult to debug what exactly was being sent between the devices - the only way to output something from the Arduino was to send it back across the serial and print it in the Processing console. Which is exactly the process that’s not working quite right. But eventually I got the Processing project reading sequence data from a local file, and sending it over the serial one line every 3 seconds, and the Arduino reading it correctly and playing the sequence. But ultimately the Arduino program needs to request the next sequence on demand, so you start having to develop a two-way communication/RPC protocol. So I have the Arduino sending the text “get” to the computer, and it recognizes that and then sends the next line. Sometimes it gets the text “gget” or “geget” and it doesn’t work, and it also gets a lot of “null” messages. I’m still not sure what the issue is there but it seems like something to do with Serial.available() and perhaps line-ending/termination characters? But, after two days of breaking things and being lost, I have the whole program back to exactly where it was before, except reading from a file instead of hardcoded data taking up all the memory. Success!
+            </p>
+          </div>
+        </div>
+
+        <div id="june5" class="post">
+          <h2 class="underline">Color Thoughts</h2>
+          <h3>June 5</h3>
+          <div class="post-content">
+            <p>
+              Now that I have file read/transfer working, I’m going to try to tackle color control. How to control color is something I’ve been thinking about and somewhat stuck on for a while. Trying to think of the different “modes” or classes of color usage - e.g. single color, color list, gradient, rainbow, etc. Should the color be controlled by the pattern or the loop? How can it work for both live mode and programmed?
+            </p>
+
+            <p>
+              Added parsing and skipping of comments in the program. I genuinely look forward to gradually evolving this into to an abomination of a file format and super-fragile parser, as well as tediously editing files full of numbers until I get around to developing an editor.
+            </p>
+
+            <p>
+              While trying to get the color changing to work, I discovered that the arguments of a function call are evaluated in an unspecified (or possibly reverse?) order, so reading multiple values from the Serial port in one function call will yield strange results.
+            </p>
+
+            <p>
+              Add functionality to set color from program<br />
+              Looks for a -1 in the first slot
+            </p>
+          </div>
+        </div>
+
+        <div id="june6" class="post">
+          <h2 class="underline">Color Progress</h2>
+          <h3>June 6</h3>
+          <div class="post-content">
+            <p>
+              I finally figured out some color stuff that I think makes sense. Yesterday I was going forward with my plan that there would be global values for mainColor, colorList, colorMode, etc. You would use commands (“Actions”) in the program file to change those values between sequences. In live mode I would convert to the value of a knob to a color on the rainbow and use that to set the mainColor. The patterns would then make use of these global colors. I updated the program file parser to recognize commands, signalled by a “-1” in the first column. I started converting more patterns to using these colors, when I came across one that derived the color based on a parameter. Over the duration of a pattern sequence, it would cycle through the rainbow. This wasn’t going to work because the patterns should be referencing the global colors. I thought for a while about how to allow a sequence to control the color without using a parameter. Perhaps expose the overall sequence progress to the pattern. Perhaps have a color mode that cycles through the rainbow over a sequence. Neither of these really made sense.
+            </p>
+
+            <p>
+              Then I remembered that it would be best for live mode to actually just use a parameter to set the base color. And maybe it would be better to just always think of the base color as a percentage along a rainbow instead of actual hex values. And all color settings go through parameters. But how would this system handle a pattern that uses two colors, or six colors, or gradients? And then I realized you could use colorOffset parameter, and a numColors parameter, and that would support a lot of options with smooth transitions in both live and program modes.
+            </p>
+
+            <p>
+              [perhaps an image demonstrating different knob configurations and their effects:<br />
+              low offset => mellow gradient (small part of rainbow)<br />
+              medium offset => rainbow<br />
+              large offset => “random” colors (skip large parts of the rainbow)<br />
+              numColors => 2-color stripes, 6 color spinner, etc]<br />
+            </p>
+
+            <p>
+              So I implemented that and started using it in a few programs [add video?] At this point I don’t have a use for the color mode, or the whole command parsing feature, but I feel like I might want them in the near future.
+            </p>
+
+          </div>
+        </div>
+
+        <div id="june8" class="post">
+          <h2 class="underline">MicroSD woes...and 3D printing!</h2>
+          <h3>June 8</h3>
+          <div class="post-content">
+            <p>
+              I spent the majority of last night endeavoring to get the microSD module working, to no avail. I double checked and redid the wiring roughly 78 times. I set up some buttons and LEDs on a breadboard and wrote a program to test each of the pins in input and output mode, tested the wires, tested another peripheral - everything works. But surely, as a novice, the problem lies with me, and not the cheapo module I bought for $5. One reviewer claimed his didn’t work, but really, what does he know? I tested on 5v and 3.3v power, tested the bundled SD library’s CardInfo sketch, made sure the chipSelect pin in the code matched the one on the board (at least 9 times), installed the SdFat library and ran the SDInfo sketch, and performed a dozen other troubleshooting rituals gleaned from forum topics and documentation pages. Then I took it apart and rewired it again. In a totally predictable turn of events, it still didn’t work, so I declared the module a dud and my night a waste. The only silver lining is that I did get this sweet LCD working pretty easily:
+            </p>
+
+            <p>[lcd activated]</p>
+
+            <p>
+              But then I started thinking about the enclosure for the controller. I was talking about it to a guy in our company’s little maker space about it earlier in the day, and he said he had 3D printed some enclosures before. That was intriguing because I hadn’t considered it and had never 3D printed anything, and we did have a MakerBot there. He showed me a simple box he had made in SketchUp, a free and simple to use modeling program. It can export to the STL format used by most 3D printers. I’ve used it before so I was stoked, I could learn a little about 3D printing and have my custom box by the end of week! So I sacrificed a good night’s sleep and fiddled around with SketchUp for a while. In thinking about what type of box would hold itself together well without extra parts, I remembered the baseball display cases I used to have that would slide apart (see here), so I decided to try for that. This is what I came up with:
+            </p>
+
+            <p>[sketchup rendering]</p>
+
+            <p>
+              As I was finally going to bed, I realized that that shape would probably not work very well in a printer because it would be difficult to support the huge overhang. And I couldn’t just rotate it so the legs were pointing up, because then it would be too tall to fit in the printable space. I was going to have to redesign it so the “arms” were not sticking out in the long direction. The SketchUp experience had been somewhat frustrating due to lack of precise controls (e.g. you can’t just say, “move this point to (X,Y,Z)” AFAIK), it was a lot of clicking and wiggling and measuring, and ultimately it wasn’t that precise (I don’t know what ‘~8”’ means and why can’t I just force it to 8” exactly?), and further modification would require yet more wiggling. I figured “this is a pretty simple shape, I should just create a program to generate it.” I looked at the STL format, and luckily it’s dead simple, essentially just a list of triangle vertices. The spec also includes a normal vector for each triangle, but according to Wikipedia it can generally be omitted.
+            </p>
+
+            <p>
+              So I spent a lot of the day writing a JS program to generate an STL file of my shape. In college I really really wanted to be a game programmer and spent a lot of time learning 3D graphics programming, so I’ve done some of this before but long ago. I started with the basic structure of the ASCII STL format, hardcoded some triangles, made a function to generate quadrilaterals (two triangles), started adding faces of the design, etc. With each addition I tested the output with an online STL viewer. At some point I realized that all the points of the main shape were the corners of a cube inside a cube, so I made an array of points and a labeled diagram to help specify the faces.
+            </p>
+
+            <p>[picture of drawings/scribbles]</p>
+
+            <p>
+              Technically it probably would have been less effort to just keep messing with SketchUp, and I really just traded fiddling with mouse motions for fiddling with mind-numbing permutations of algebraic coordinates, but it felt more mentally stimulating and I like the end result better. I now have both sides of the box made to exact proportions, and I can modify the dimensions, the thickness, or the size of the LCD window very easily. Making those modifications to an already-made model would likely be painful, if not impossible in SketchUp. In the future I might pick up Blender again, the full-featured open source 3D modeling tool I used in college to make models for a video game. I also just heard of OpenSCAD today, and based on their tagline of “The Programmers Solid 3D CAD Modeller” and the homepage image of a code window next to a model viewer, that looks very promising. Programming and mouse-wiggling! But there’s just something satisfying about coding your own little model from scratch, I’d like to play with that some more.
+            </p>
+          </div>
+        </div>
+
+        <div class="post footer">
+          <h3 class="underline">Silicate 2016</h3>
+        </div>
+
+      </div> <!-- end content -->
+
+
+      <div id="settings" class="weight-bold">
+
+        <div id="settings-btn">
+          <a id="settings-link"><div class="icon-cog"></div></a>
+        </div>
+        <div id="settings-pane">
+          <div id="set-theme" class="underline">
+            <a id="light">light</a>&nbsp;&nbsp;&nbsp;
+            <a id="dark" class="active">dark</a>
+          </div>
+          <div id="set-heading-case" class="underline">
+            <a id="lowercase" class="active">lower</a>&nbsp;&nbsp;&nbsp;
+            <a id="uppercase">UPPER</a>
+          </div>
+          <div id="set-font-weight" class="underline">
+            <a id="weight-normal">normal</a>&nbsp;&nbsp;&nbsp;
+            <a id="weight-bold" class="active">bold</a>
+          </div>
+          <div id="set-font" class="underline">
+            <a id="open-sans">open sans</a><br>
+            <a id="lato">lato</a><br>
+            <a id="droid-sans">droid sans</a><br>
+            <a id="pt-sans-narrow">pt sans narrow</a><br>
+            <a id="oxygen" class="active">oxygen</a>
+           </div>
+          <div id="set-link-color" class="underline">
+            <a id="red">red</a>&nbsp;
+            <a id="blue" class="active">blue</a>&nbsp;
+            <a id="green">green</a>&nbsp;
+          </div>
+        </div>
+
+      </div> <!-- end settings widget -->
+
+      <!-- lightbox -->
+      <div id="lbox">
+        <div id="lbox-prev"><div class="icon-chevron-left"></div></div>
+        <div id="lbox-content">
+          <img src="#" />
+        </div>
+        <div id="lbox-next"><div class="icon-chevron-right"></div></div>
+      </div>
+
+    </div> <!-- end page -->
+
+    <script src="js/matchMedia.js" type="text/javascript"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-46589900-2', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+  </body>
+</html>
